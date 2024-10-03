@@ -5,13 +5,17 @@ import java.util.ArrayList;
 
 public class FiltroPeliculas {
 
-    class Movie implements Serializable {
+    static class Movie implements Serializable {
         private String id;
         private String title;
         private Integer year;
         private String director;
         private String genre;
-        
+
+        @Override
+        public String toString() {
+            return id + "," + title + "," + year + "," + director + "," + genre;
+        }
     }
 
     public void filtrarPorGenero(String genero) {
@@ -38,7 +42,7 @@ public class FiltroPeliculas {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("peliculasdef.csv"))) {
             for (Movie movie : movies) {
                 if (movie.genre.equalsIgnoreCase(genero)) {
-                    writer.write(movie.toString() + "\n");
+                    writer.write(movie + "\n");
                 }
             }
         } catch (IOException e) {
